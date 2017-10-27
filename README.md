@@ -2,11 +2,11 @@
 
 [![npm](https://img.shields.io/npm/l/immutable-queue.svg?style=flat-square)][shield-npm-license-link]
 
-__Travis CI__ (`master`)__:__ [![Travis CI - master](https://img.shields.io/travis/jonathanmarvens/immutable-queue/master.svg?style=flat-square)][shield-travis-ci-link]
+__Travis CI__ (`master`)__:__ [![Travis CI - master](https://img.shields.io/travis/jonathanmarvens/immutable-js-queue/master.svg?style=flat-square)][shield-travis-ci-link]
 
-__Travis CI__ (`develop`)__:__ [![Travis CI - develop](https://img.shields.io/travis/jonathanmarvens/immutable-queue/develop.svg?style=flat-square)][shield-travis-ci-link]
+__Travis CI__ (`develop`)__:__ [![Travis CI - develop](https://img.shields.io/travis/jonathanmarvens/immutable-js-queue/develop.svg?style=flat-square)][shield-travis-ci-link]
 
-[![Greenkeeper](https://badges.greenkeeper.io/jonathanmarvens/immutable-queue.svg)][shield-greenkeeper-link]
+[![Greenkeeper](https://badges.greenkeeper.io/jonathanmarvens/immutable-js-queue.svg)][shield-greenkeeper-link]
 
 A tiny implementation of a FIFO (“first in”, “first out”) queue built on [__Immutable.js__](https://facebook.github.io/immutable-js).
 
@@ -47,4 +47,4 @@ limitations under the License.
 [shield-greenkeeper-link]: https://greenkeeper.io
 [shield-npm-license-link]: http://spdx.org/licenses/Apache-2.0.html
 [shield-npm-version-link]: https://www.npmjs.com/package/immutable-queue
-[shield-travis-ci-link]: https://travis-ci.org/jonathanmarvens/immutable-queue
+[shield-travis-ci-link]: https://travis-ci.org/jonathanmarvens/immutable-js-queue
