@@ -22,19 +22,21 @@ import Objectz = require('objectz')
 export type ImmutableQueue<T> = { list: Immutable.List<T>; }
 
 export const clear = <T>(queue: ImmutableQueue<T>) => {
-  queue.list = queue.list.clear()
+  return Objectz.createOwnNonEnumerableFrozenObject<ImmutableQueue<T>>({
+    list: queue.list.clear()
+  })
 }
 
 export const create = <T>() => {
-  return Objectz.createOwnNonEnumerableSealedObject<ImmutableQueue<T>>({
+  return Objectz.createOwnNonEnumerableFrozenObject<ImmutableQueue<T>>({
     list: Immutable.List<T>()
   })
 }
 
 export const createFrom = <T>(iterable: IterableIterator<T>) => {
-  const queue = create<T>()
+  let queue = create<T>()
   for (let element of iterable) {
-    enqueue(queue, element)
+    queue = enqueue(queue, element)
   }
   return queue
 }
@@ -44,13 +46,17 @@ export const createIterator = <T>(queue: ImmutableQueue<T>) => {
 }
 
 export const dequeue = <T>(queue: ImmutableQueue<T>) => {
-  const element = queue.list.first()
-  queue.list = queue.list.shift()
-  return element
+  let element = queue.list.first() as (T | undefined)
+  const newQueue = Objectz.createOwnNonEnumerableFrozenObject<ImmutableQueue<T>>({
+    list: queue.list.shift()
+  })
+  return [newQueue, element] as [(typeof newQueue), (typeof element)]
 }
 
 export const enqueue = <T>(queue: ImmutableQueue<T>, element: T) => {
-  queue.list = queue.list.push(element)
+  return Objectz.createOwnNonEnumerableFrozenObject<ImmutableQueue<T>>({
+    list: queue.list.push(element)
+  })
 }
 
 export const isEmpty = <T>(queue: ImmutableQueue<T>) => queue.list.isEmpty()
