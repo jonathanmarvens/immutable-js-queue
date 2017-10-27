@@ -17,7 +17,7 @@
  */
 
 import Immutable = require('immutable')
-import objectz = require('objectz')
+import Objectz = require('objectz')
 
 export type ImmutableQueue<T> = { list: Immutable.List<T>; }
 
@@ -26,7 +26,7 @@ export const clear = <T>(queue: ImmutableQueue<T>) => {
 }
 
 export const create = <T>() => {
-  return objectz.createOwnNonEnumerableSealedObject<ImmutableQueue<T>>({
+  return Objectz.createOwnNonEnumerableSealedObject<ImmutableQueue<T>>({
     list: Immutable.List<T>()
   })
 }
