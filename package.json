@@ -1,0 +1,40 @@
+{
+  "author": "Jonathan Barronville <jonathan@belairlabs.com>",
+  "bugs": "https://github.com/jonathanmarvens/immutable-queue/issues",
+  "dependencies": {
+    "immutable": "^3.8.2",
+    "objectz": "^0.0.4"
+  },
+  "description": "A tiny implementation of a FIFO (“first in”, “first out”) queue built on Immutable.js.",
+  "devDependencies": {
+    "@types/jest": "^21.1.5",
+    "@types/node": "^8.0.47",
+    "jest": "^21.2.1",
+    "ts-jest": "^21.1.3",
+    "typescript": "^2.5.3"
+  },
+  "directories": {
+    "lib": "./src",
+    "test": "./__tests__"
+  },
+  "engines": {
+    "node": ">=6.5.0",
+    "npm": ">=5.0.0"
+  },
+  "homepage": "https://github.com/jonathanmarvens/immutable-queue",
+  "license": "Apache-2.0",
+  "main": "./src/index.js",
+  "name": "immutable-queue",
+  "repository": "jonathanmarvens/immutable-queue",
+  "scripts": {
+    "build-src": "npm run compile-typescript --",
+    "ci-build": "npm run build-src && npm test",
+    "compile-typescript": "tsc",
+    "prepublishOnly": "npm run build-src",
+    "test": "jest",
+    "watch-build-src": "npm run build-src -- --watch",
+    "watch-test": "npm test -- --watch"
+  },
+  "types": "./src/index.d.ts",
+  "version": "1.0.0"
+}
