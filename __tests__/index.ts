@@ -19,12 +19,13 @@
 import * as ImmutableQueue from '../src/index'
 
 test('`ImmutableQueue.create(…)` creates a queue.', () => {
-  const q = ImmutableQueue.create<string>()
-  expect(ImmutableQueue.size<string>(q)).toBe(0)
-  ImmutableQueue.enqueue<string>(q, 'foo')
-  expect(ImmutableQueue.size<string>(q)).toBe(1)
-  expect(ImmutableQueue.dequeue<string>(q)).toBe('foo')
-  expect(ImmutableQueue.size<string>(q)).toBe(0)
+  const q001 = ImmutableQueue.create<string>()
+  expect(ImmutableQueue.size<string>(q001)).toBe(0)
+  const q002 = ImmutableQueue.enqueue<string>(q001, 'foo')
+  expect(ImmutableQueue.size<string>(q002)).toBe(1)
+  const [q003, e] = ImmutableQueue.dequeue<string>(q002)
+  expect(e).toBe('foo')
+  expect(ImmutableQueue.size<string>(q003)).toBe(0)
 })
 
 test('`ImmutableQueue.createFrom(…)` creates a queue from an iterable.', () => {
@@ -34,79 +35,85 @@ test('`ImmutableQueue.createFrom(…)` creates a queue from an iterable.', () =>
       yield value
     }
   })()
-  const q = ImmutableQueue.createFrom<number>(iterable)
-  expect(ImmutableQueue.size<number>(q)).toBe(3)
-  expect(ImmutableQueue.dequeue<number>(q)).toBe(1)
-  expect(ImmutableQueue.dequeue<number>(q)).toBe(2)
-  expect(ImmutableQueue.dequeue<number>(q)).toBe(3)
-  expect(ImmutableQueue.dequeue<number>(q)).toBeUndefined()
-  expect(ImmutableQueue.size<number>(q)).toBe(0)
+  const q001 = ImmutableQueue.createFrom<number>(iterable)
+  expect(ImmutableQueue.size<number>(q001)).toBe(3)
+  const [q002, e001] = ImmutableQueue.dequeue<number>(q001)
+  expect(e001).toBe(1)
+  const [q003, e002] = ImmutableQueue.dequeue<number>(q002)
+  expect(e002).toBe(2)
+  const [q004, e003] = ImmutableQueue.dequeue<number>(q003)
+  expect(e003).toBe(3)
+  const [q005, e004] = ImmutableQueue.dequeue<number>(q004)
+  expect(e004).toBeUndefined()
+  expect(ImmutableQueue.size<number>(q005)).toBe(0)
 })
 
 test('`ImmutableQueue.enqueue(…)` adds elements to a queue.', () => {
-  const q = ImmutableQueue.create<number>()
+  let q = ImmutableQueue.create<number>()
   expect(ImmutableQueue.size<number>(q)).toBe(0)
-  ImmutableQueue.enqueue<number>(q, 1)
+  q = ImmutableQueue.enqueue<number>(q, 1)
   expect(ImmutableQueue.size<number>(q)).toBe(1)
 })
 
 test('`ImmutableQueue.dequeue(…)` removes elements from a queue.', () => {
-  const q = ImmutableQueue.create<number>()
-  expect(ImmutableQueue.size<number>(q)).toBe(0)
+  let q001 = ImmutableQueue.create<number>()
+  expect(ImmutableQueue.size<number>(q001)).toBe(0)
   let qSize = 0
   for (let i = 0; i < 10; i++) {
-    ImmutableQueue.enqueue<number>(q, i)
+    q001 = ImmutableQueue.enqueue<number>(q001, i)
     qSize++
-    expect(ImmutableQueue.size<number>(q)).toBe(qSize)
+    expect(ImmutableQueue.size<number>(q001)).toBe(qSize)
   }
-  expect(ImmutableQueue.size<number>(q)).toBe(qSize)
-  while (! ImmutableQueue.isEmpty<number>(q)) {
-    const _value = ImmutableQueue.dequeue<number>(q)
+  expect(ImmutableQueue.size<number>(q001)).toBe(qSize)
+  let q002 = q001
+  while (! ImmutableQueue.isEmpty<number>(q002)) {
+    let _value: (number | undefined)
+    [q002, _value] = ImmutableQueue.dequeue<number>(q002)
   }
-  expect(ImmutableQueue.size<number>(q)).toBe(0)
+  expect(ImmutableQueue.size<number>(q002)).toBe(0)
 })
 
 test('`ImmutableQueue.clear(…)` empties a queue.', () => {
-  const q = ImmutableQueue.create<number>()
-  expect(ImmutableQueue.size<number>(q)).toBe(0)
+  let q001 = ImmutableQueue.create<number>()
+  expect(ImmutableQueue.size<number>(q001)).toBe(0)
   let qSize = 0
   for (let i = 0; i < 25; i++) {
-    ImmutableQueue.enqueue<number>(q, i)
+    q001 = ImmutableQueue.enqueue<number>(q001, i)
     qSize++
-    expect(ImmutableQueue.size<number>(q)).toBe(qSize)
+    expect(ImmutableQueue.size<number>(q001)).toBe(qSize)
   }
-  expect(ImmutableQueue.size<number>(q)).toBe(qSize)
-  ImmutableQueue.clear<number>(q)
-  expect(ImmutableQueue.size<number>(q)).toBe(0)
+  expect(ImmutableQueue.size<number>(q001)).toBe(qSize)
+  q001 = ImmutableQueue.clear<number>(q001)
+  expect(ImmutableQueue.size<number>(q001)).toBe(0)
 })
 
 test('`ImmutableQueue.isEmpty(…)` returns the emptiness status of a queue.', () => {
-  const q = ImmutableQueue.create<number>()
+  let q = ImmutableQueue.create<number>()
   expect(ImmutableQueue.isEmpty<number>(q)).toBe(true)
   for (let i = 0; i < 5; i++) {
-    ImmutableQueue.enqueue<number>(q, i)
+    q = ImmutableQueue.enqueue<number>(q, i)
   }
   expect(ImmutableQueue.isEmpty<number>(q)).toBe(false)
-  ImmutableQueue.clear<number>(q)
+  q = ImmutableQueue.clear<number>(q)
   expect(ImmutableQueue.isEmpty<number>(q)).toBe(true)
 })
 
 test('`ImmutableQueue.size(…)` returns the size of a queue.', () => {
-  const q = ImmutableQueue.create<number>()
+  let q = ImmutableQueue.create<number>()
   expect(ImmutableQueue.size<number>(q)).toBe(0)
   for (let i = 0; i < 5; i++) {
-    ImmutableQueue.enqueue<number>(q, i)
+    q = ImmutableQueue.enqueue<number>(q, i)
   }
   expect(ImmutableQueue.size<number>(q)).toBe(5)
-  ImmutableQueue.clear<number>(q)
+  q = ImmutableQueue.clear<number>(q)
   expect(ImmutableQueue.size<number>(q)).toBe(0)
 })
 
 test('`ImmutableQueue.createIterator(…)` creates an iterator for a queue.', () => {
-  const q = ImmutableQueue.create<number>()
+  let q = ImmutableQueue.create<number>()
   expect(ImmutableQueue.size<number>(q)).toBe(0)
   for (let i = 0; i < 25; i++) {
-    ImmutableQueue.enqueue<number>(q, i)
+    q = ImmutableQueue.enqueue<number>(q, i)
   }
   expect(ImmutableQueue.size<number>(q)).toBe(25)
   const iterator = ImmutableQueue.createIterator<number>(q)
