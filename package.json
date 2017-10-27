@@ -1,6 +1,6 @@
 {
   "author": "Jonathan Barronville <jonathan@belairlabs.com>",
-  "bugs": "https://github.com/jonathanmarvens/immutable-queue/issues",
+  "bugs": "https://github.com/jonathanmarvens/immutable-js-queue/issues",
   "dependencies": {
     "immutable": "^3.8.2",
     "objectz": "^0.0.4"
@@ -21,11 +21,11 @@
     "node": ">=6.5.0",
     "npm": ">=5.0.0"
   },
-  "homepage": "https://github.com/jonathanmarvens/immutable-queue",
+  "homepage": "https://github.com/jonathanmarvens/immutable-js-queue",
   "license": "Apache-2.0",
   "main": "./src/index.js",
   "name": "immutable-queue",
-  "repository": "jonathanmarvens/immutable-queue",
+  "repository": "jonathanmarvens/immutable-js-queue",
   "scripts": {
     "build-src": "npm run compile-typescript --",
     "ci-build": "npm run build-src && npm test",
@@ -36,5 +36,5 @@
     "watch-test": "npm test -- --watch"
   },
   "types": "./src/index.d.ts",
-  "version": "1.0.2"
+  "version": "1.0.3"
 }
