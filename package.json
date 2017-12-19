@@ -10,7 +10,7 @@
     "@types/jest": "^21.1.5",
     "@types/node": "^8.0.47",
     "jest": "^21.2.1",
-    "ts-jest": "^21.1.4",
+    "ts-jest": "^22.0.0",
     "typescript": "^2.5.3"
   },
   "directories": {
